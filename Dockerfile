@@ -25,10 +25,10 @@ RUN mkdir -p ${APP_ROOT} \
   && git config core.sparseCheckout true \
   && git fetch --depth=1 --tags origin refs/tags/${APP_VERSION} \
   && git checkout refs/tags/${APP_VERSION} -b ${APP_VERSION} \
-  && git reset --hard
+  && git reset --hard \
+  && chmod +x hack/devtools.sh
 
-RUN chmod +x hack/devtools.sh \
-  && set -e -x \
+RUN set -e -x \
   && ./hack/devtools.sh \
   && mkdir -p bin/ \
   && go build -o bin/swagger ./cmd/swagger \
